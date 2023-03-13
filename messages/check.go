@@ -1,4 +1,4 @@
-package store
+package messages
 
 import (
 	"sync"
@@ -21,9 +21,9 @@ func Check(wg *sync.WaitGroup) {
 	if now-preTime < cycle {
 		return
 	}
-	for k, v := range CS {
-		if now-v > duration {
-			println("清楚记录:", k, v)
+	for k, v := range MS {
+		if now-v.Times[len(v.Times)-1] > duration {
+			println("清楚记录:", k, v.Msgs)
 			delete(MS, k)
 		}
 	}

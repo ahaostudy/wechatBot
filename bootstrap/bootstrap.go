@@ -7,8 +7,9 @@ import (
 	"github.com/poorjobless/wechatbot/handlers"
 )
 
+var BotID string
+
 func Run() {
-	//bot := openwechat.DefaultBot()
 	bot := openwechat.DefaultBot(openwechat.Desktop) // 桌面模式，上面登录不上的可以尝试切换这种模式
 
 	// 注册消息处理函数
@@ -22,10 +23,17 @@ func Run() {
 	err := bot.HotLogin(reloadStorage)
 	if err != nil {
 		if err = bot.Login(); err != nil {
-			log.Printf("login error: %v \n", err)
+			log.Printf("bot.login error: %v \n", err)
 			return
 		}
 	}
+	// 设置机器人账号ID
+	self, err := bot.GetCurrentUser()
+	BotID = self.ID()
 	// 阻塞主goroutine, 直到发生异常或者用户主动退出
-	bot.Block()
+	err = bot.Block()
+	if err != nil {
+		log.Printf("bot.block error: %v \n", err)
+		return
+	}
 }
