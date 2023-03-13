@@ -1,0 +1,15 @@
+{
+  "system_content": "你是微信机器人",
+  "api_key": [
+    "sk-xxx"
+  ],
+  "emails": [
+    "xxx@email.com"
+  ],
+  "admin_id": "123456789",
+  "whitelist": ["WechatRobot测试群"],
+  "is_warning": true,
+  "auto_pass": true,
+  "duration": 5,
+  "count": 8
+}
